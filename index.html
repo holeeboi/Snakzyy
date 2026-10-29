@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Snakzy setup guide: play games, collect coins, redeem rewards</title>
+<meta name="description" content="Step-by-step setup guide for Snakzy, a free mobile games rewards app. 18+. Rewards vary.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3F2FB; --surface:#FFFFFF; --ink:#1E1B4B; --muted:#5A567F; --line:#DAD7F0;
+  --brand:#5B3DF5; --brand-ink:#FFFFFF; --coin:#FFC83D; --coin-ink:#3A2A00;
+  --head:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;
+  --body:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#15123A;--surface:#1F1B52;--ink:#EEEBFF;--muted:#B0ABD6;--line:#34308A;--brand:#8B73FF;--brand-ink:#12102E;color-scheme:dark}
+}
+:root[data-theme="dark"]{--bg:#15123A;--surface:#1F1B52;--ink:#EEEBFF;--muted:#B0ABD6;--line:#34308A;--brand:#8B73FF;--brand-ink:#12102E;color-scheme:dark}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body)}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--head);line-height:1.1;margin:0}
+h1{font-size:clamp(34px,9vw,52px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(24px,6vw,30px);font-weight:800;letter-spacing:-.01em;margin-bottom:12px}
+h3{font-size:19px;font-weight:600;margin-bottom:4px}
+p{margin:0 0 14px}
+.hero{padding:44px 0 28px}
+.age{display:inline-block;background:var(--coin);color:var(--coin-ink);font-weight:700;font-size:14px;padding:4px 12px;border-radius:99px;margin-bottom:18px}
+.lead{color:var(--muted);font-size:18px;margin:16px 0 24px;max-width:34em}
+.btn{display:inline-block;background:var(--brand);color:var(--brand-ink);font:700 18px var(--body);text-decoration:none;padding:16px 28px;border-radius:14px;min-height:52px}
+.btn:hover{filter:brightness(1.08)}
+.btn:focus-visible,summary:focus-visible{outline:3px solid var(--coin);outline-offset:3px}
+.note{font-size:14px;color:var(--muted);margin-top:12px}
+section{padding:28px 0}
+.meter{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
+.track{height:18px;background:var(--line);border-radius:99px;overflow:hidden;margin:14px 0 8px}
+.fill{height:100%;width:0;background:var(--coin);border-radius:99px;transition:width .9s ease}
+.meter.on .fill{width:100%}
+.ends{display:flex;justify-content:space-between;font-size:14px;color:var(--muted)}
+ol.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 22px 52px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--coin);color:var(--coin-ink);font:800 17px var(--head);display:grid;place-items:center}
+ol.steps li::after{content:"";position:absolute;left:17px;top:42px;bottom:6px;width:2px;background:var(--line)}
+ol.steps li:last-child::after{display:none}
+ol.steps p{color:var(--muted);margin:0}
+.warn{background:var(--surface);border-left:6px solid var(--coin);border-radius:12px;padding:18px 20px}
+.warn ul{margin:8px 0 0;padding-left:20px}
+.warn li{margin-bottom:6px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700}
+details p{margin:10px 0 0;color:var(--muted)}
+.cta-end{text-align:center;padding:36px 0}
+footer{border-top:1px solid var(--line);padding:22px 0 40px;font-size:13px;color:var(--muted)}
+.demo-row{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 14px;scroll-snap-type:x mandatory}
+.demo{flex:0 0 190px;scroll-snap-align:start}
+.phone{background:var(--surface);border:2px solid var(--line);border-radius:26px;padding:12px;height:270px;display:flex;flex-direction:column;gap:8px;font-size:13px}
+.phone .bar{height:6px;width:36px;background:var(--line);border-radius:9px;margin:0 auto 4px}
+.prow{display:flex;justify-content:space-between;align-items:center;background:var(--bg);border-radius:10px;padding:8px 10px}
+.pill{background:var(--brand);color:var(--brand-ink);border-radius:99px;padding:2px 10px;font-weight:700;font-size:12px}
+.pill.off{background:var(--line);color:var(--muted)}
+.dot{width:9px;height:9px;border-radius:50%;background:#2BB673;display:inline-block;margin-right:6px}
+.coin{width:46px;height:46px;border-radius:50%;background:var(--coin);color:var(--coin-ink);display:grid;place-items:center;font:800 20px var(--head);margin:6px auto}
+.mini{height:8px;background:var(--line);border-radius:9px;overflow:hidden}
+.mini i{display:block;height:100%;width:30%;background:var(--coin)}
+.demo h3{font-size:16px;margin:10px 0 2px}
+.demo p{font-size:14px;color:var(--muted);margin:0}
+.caption{font-size:13px;color:var(--muted);margin-top:4px}
+.vid{margin-bottom:18px}
+.vid video{width:100%;border-radius:16px;background:#000}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="hero">
+    <span class="age">18+ · US</span>
+    <h1>Play mobile games. Collect coins. Redeem rewards.</h1>
+    <p class="lead">Snakzy is a free rewards app from the Eneba marketplace. Here’s exactly how to set it up, and what to expect before your first payout.</p>
+    <a class="btn" href="https://blitzrewarded.com/o/81/879232" target="_blank" rel="noopener sponsored">Open Snakzy</a>
+    <p class="note">Rewards vary. Earnings are not guaranteed.</p>
+  </header>
+
+  <section>
+    <div class="meter" id="meter">
+      <h2>What the first cashout looks like</h2>
+      <p>You collect coins by playing games and hitting milestones. About 1,000 coins equal $1 in rewards. The first cashout usually unlocks at 35,000 coins, roughly $35, and the exact minimum depends on your country.</p>
+      <div class="track" role="img" aria-label="Progress bar toward the 35,000 coin first cashout"><div class="fill"></div></div>
+      <div class="ends"><span>0 coins</span><span>35,000 coins ≈ $35</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>See how it works</h2>
+    <div class="vid" id="vid" hidden>
+      <video controls playsinline preload="metadata"><source src="demo.mp4" type="video/mp4"></video>
+      <p class="caption">Screen recording of the setup. Your rewards and timing will differ.</p>
+    </div>
+    <div class="demo-row">
+      <div class="demo"><div class="phone"><div class="bar"></div>
+        <div class="prow"><span>Game A</span><span class="pill">Install</span></div>
+        <div class="prow"><span>Game B</span><span class="pill">Install</span></div>
+        <div class="prow"><span>Game C</span><span class="pill">Install</span></div></div>
+        <h3>1. Pick a game</h3><p>Choose one inside Snakzy and install it from there.</p></div>
+      <div class="demo"><div class="phone"><div class="bar"></div>
+        <div class="prow"><span><i class="dot"></i>Tracking on</span></div>
+        <div class="coin">▶</div>
+        <div class="prow"><span>Playing</span><span class="pill off">Stop</span></div></div>
+        <h3>2. Play with tracking on</h3><p>Open the game through Snakzy and press stop when done.</p></div>
+      <div class="demo"><div class="phone"><div class="bar"></div>
+        <div class="prow"><span>Milestone</span><span class="pill off">Pending</span></div>
+        <div class="coin">●</div>
+        <p style="text-align:center">Coins can take 24 to 48 hours to confirm.</p></div>
+        <h3>3. Hit milestones</h3><p>Coins are added once your progress is confirmed.</p></div>
+      <div class="demo"><div class="phone"><div class="bar"></div>
+        <div class="mini"><i></i></div>
+        <div class="prow"><span>Gift card</span></div>
+        <div class="prow"><span>PayPal*</span></div>
+        <div class="prow"><span class="pill off">Redeem</span><span>at minimum</span></div></div>
+        <h3>4. Redeem</h3><p>Unlocks at the minimum, about 35,000 coins. *Where available.</p></div>
+    </div>
+    <p class="caption">Illustration only. These are not real app screenshots or real earnings, and the rewards you get will vary.</p>
+  </section>
+
+  <section>
+    <h2>Setup guide</h2>
+    <ol class="steps">
+      <li><h3>Check your device</h3><p>Android has a full app. On iPhone, use the web version at snakzy.app and add it to your Home Screen.</p></li>
+      <li><h3>Tap “Open Snakzy”</h3><p>Use the button on this page so your sign-up is linked correctly.</p></li>
+      <li><h3>Create your account</h3><p>Sign up with your email. If you already have an Eneba account, you can log in with the same email.</p></li>
+      <li><h3>Pick a game inside Snakzy</h3><p>Always start the install from inside Snakzy, not directly from the Play Store, or your progress may not count.</p></li>
+      <li><h3>Play with tracking on</h3><p>Open the game through Snakzy, keep tracking turned on, and press stop in Snakzy when you finish.</p></li>
+      <li><h3>Reach the milestones</h3><p>Coins come from playtime and in-game goals. Offers can take 24 to 48 hours to show as pending before they’re confirmed.</p></li>
+      <li><h3>Redeem your coins</h3><p>Once you reach the minimum, choose a gift card, or PayPal where it’s available in your region.</p></li>
+    </ol>
+    <a class="btn" href="https://blitzrewarded.com/o/81/879232" target="_blank" rel="noopener sponsored">Start setup</a>
+  </section>
+
+  <section>
+    <div class="warn">
+      <h2 style="font-size:22px">Be realistic before you start</h2>
+      <ul>
+        <li>This is a games rewards app, not a job or a way to cover bills.</li>
+        <li>Reaching the first cashout takes time and regular play.</li>
+        <li>Game offers expire, often within one to three months.</li>
+        <li>Snakzy may ask you to verify your identity before paying out.</li>
+        <li>PayPal depends on your region and account status.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Common questions</h2>
+    <details><summary>Is it free?</summary><p>Yes. Snakzy is free to download and play.</p></details>
+    <details><summary>Do I get cash?</summary><p>Rewards are mainly gift cards, with PayPal available to some users. Amounts vary and nothing is guaranteed.</p></details>
+    <details><summary>Why didn’t my progress count?</summary><p>The most common cause is installing a game outside Snakzy or playing with tracking off. Follow steps 4 and 5 above.</p></details>
+    <details><summary>Who runs Snakzy?</summary><p>Snakzy is developed by Eneba (Helis Play UAB), based in Vilnius, Lithuania. Support is available inside the app.</p></details>
+  </section>
+
+  <section class="cta-end">
+    <h2>Ready to try it?</h2>
+    <a class="btn" href="https://blitzrewarded.com/o/81/879232" target="_blank" rel="noopener sponsored">Open Snakzy</a>
+  </section>
+</main>
+<footer>
+  <div class="wrap">
+    <p>Disclosure: this page contains an affiliate link, and we may earn a commission if you sign up. We are an independent promoter and are not operated by Snakzy or Eneba. You must be 18 or older. Rewards vary and are not guaranteed. Terms and eligibility are set by Snakzy.</p>
+  </div>
+</footer>
+<script>
+(function(){
+  var m=document.getElementById('meter');
+  if(!m) return;
+  setTimeout(function(){m.classList.add('on')},300);
+  var v=document.getElementById('vid');
+  if(v){var vd=v.querySelector('video');vd.addEventListener('loadedmetadata',function(){v.hidden=false});vd.load();}
+})();
+</script>
+</body>
+</html>
